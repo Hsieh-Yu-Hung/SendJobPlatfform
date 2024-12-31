@@ -1,0 +1,32 @@
+services:
+
+  # 前端
+  qvue-frontend:
+    build: ./qvue-frontend
+    container_name: qvue-frontend-container
+    networks:
+      - temp-1_network
+    ports:
+      - "7080:80"
+    volumes:
+      - ./data:/app/data
+
+  # 後端
+  python-backend:
+    build: ./python-backend
+    container_name: python-backend-container
+    networks:
+      - temp-1_network
+    ports:
+      - "5987:5987"
+      - "5988:5988"
+    volumes:
+      - ./data:/app/data
+
+# 設定 docker 內部網路
+networks:
+  temp-1_network:
+    driver: bridge
+
+# docker-compose up -d --build
+# docker-compose down
